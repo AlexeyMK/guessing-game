@@ -7,7 +7,7 @@ run_simulation = (contestant) ->
     for game_count in [1..NUM_GAMES_IN_SAMPLE]
         games_won++ if run_game(contestant) is WIN
 
-    console.log """Contestant won #{games_won} games
+    console.log """#{contestant.name} won #{games_won} games
         (#{games_won / NUM_GAMES_IN_SAMPLE * 100})%"""
 
 run_game = (contestant) ->
@@ -29,6 +29,7 @@ all = (list, test_func) ->
 sample_contestant = {
     start_game: (configs) -> @game_size = configs.game_size
     guess_index: (input) -> Math.floor((Math.random() * @game_size))
+    name: "Random Guess"
 }
 
 shuffle_contestant = {
@@ -41,8 +42,16 @@ shuffle_contestant = {
             guess = Math.floor((Math.random() * @game_size))
         @previous_guesses.push guess
         return guess
+    name: "Random (Shuffled) Guess"
 }
 
+assume_linear_contestant = {
+    start_game: (configs) -> @game_size = configs.game_size
+    guess_index: (input) ->
+        Math.floor((input * @game_size))
+    name: "Assume linear distribution"
+}
 
 run_simulation sample_contestant
 run_simulation shuffle_contestant
+run_simulation assume_linear_contestant
