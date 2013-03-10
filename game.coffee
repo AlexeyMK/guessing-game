@@ -22,7 +22,7 @@ run_game = (contestant) ->
 
 sample_contestant = {
     start_game: -> "whateva"
-    guess_index: (input) -> (Math.random() * 10) % 10
+    guess_index: (input) -> Math.floor((Math.random() * 10))
 }
 
 run_simulation sample_contestant
