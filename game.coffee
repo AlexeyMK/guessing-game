@@ -1,4 +1,4 @@
-NUM_GAMES_IN_SAMPLE = 1000000
+NUM_GAMES_IN_SAMPLE = 1000000 #1000000
 NUM_ITEMS_IN_GAME = 9
 WIN = true
 
@@ -31,4 +31,18 @@ sample_contestant = {
     guess_index: (input) -> Math.floor((Math.random() * @game_size))
 }
 
+shuffle_contestant = {
+    start_game: (configs) ->
+        @game_size = configs.game_size
+        @previous_guesses = [-1]
+    guess_index: (input) ->
+        guess = -1
+        while guess in @previous_guesses
+            guess = Math.floor((Math.random() * @game_size))
+        @previous_guesses.push guess
+        return guess
+}
+
+
 run_simulation sample_contestant
+run_simulation shuffle_contestant
