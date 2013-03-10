@@ -15,8 +15,14 @@ run_game = (contestant) ->
     inputs = [Math.random() for x in [1..10]]
     guesses = [[input, contestant.guess_index(input)] for input in inputs]
     inputs_in_order = inputs[..].sort()
-    for input, index_guess in guesses
-        if inputs_in_order[index_guess] isnt input
+    return all(guesses, (input_then_index_guess) ->
+        [input, index_guess] = input_then_index_guess
+        return inputs_in_order[index_guess] is input
+    )
+
+all = (list, test_func) ->
+    for item in list
+        if not test_func(item)
             return false
     return true
 
