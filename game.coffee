@@ -1,5 +1,5 @@
 NUM_GAMES_IN_SAMPLE = 1000000
-NUM_ITEMS_IN_GAME = 3
+NUM_ITEMS_IN_GAME = 9
 WIN = true
 
 run_simulation = (contestant) ->
