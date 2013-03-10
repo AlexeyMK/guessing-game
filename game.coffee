@@ -23,8 +23,7 @@ run_game = (contestant) ->
 
 all = (list, test_func) ->
     for item in list
-        if not test_func(item)
-            return false
+        return false if not test_func(item)
     return true
 
 sample_contestant = {
