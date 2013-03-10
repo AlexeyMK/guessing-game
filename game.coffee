@@ -1,3 +1,4 @@
+# Set these lower for testing, 10k and 4 seemed to work well
 NUM_GAMES_IN_SAMPLE = 1000000
 NUM_ITEMS_IN_GAME = 9
 WIN = true
@@ -73,7 +74,7 @@ take_advantage_of_priors_contestant = {
 priors_and_better_guesses_contestant = {
     start_game: (configs) ->
         @game_size = configs.game_size
-        @prior_guesses = []  # input, guess tuples
+        @prior_guesses = []  # [input, guess] tuples
     guess_index: (cur_num) ->
         # set boundaries for reasonable max, min guesses (not including max/min)
         [min, max, min_num, max_num] = [-1, @game_size, 0, 1]
@@ -92,9 +93,6 @@ priors_and_better_guesses_contestant = {
     name: "priors + expected value guessing"
 }
 
-run_simulation sample_contestant
-run_simulation shuffle_contestant
-run_simulation assume_linear_contestant
-run_simulation take_advantage_of_priors_contestant
-run_simulation priors_and_better_guesses_contestant
-# TODO another idea would be monte carlo simulations
+run_simulation contestant for contestant in [
+    sample_contestant, shuffle_contestant, assume_linear_contestant,
+    take_advantage_of_priors_contestant, priors_and_better_guesses_contestant]
