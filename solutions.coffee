@@ -58,7 +58,6 @@ priors_and_better_guesses_contestant = {
         percentage_across_boundary = (cur_num - min_num) / (max_num - min_num)
         range = (max - min) - 2  # if min=0, max=4, options=1,2,3, range=2
         guess = Math.floor(percentage_across_boundary * (range + 1)) + (min + 1)
-        #console.log "Guess:", @prior_guesses, cur_num, max, min, guess
         @prior_guesses.push [cur_num, guess]
         return guess
     name: "priors + expected value guessing"
