@@ -1,4 +1,5 @@
 NUM_GAMES_IN_SAMPLE = 1000000
+NUM_ITEMS_IN_GAME = 3
 WIN = true
 
 run_simulation = (contestant) ->
@@ -10,10 +11,10 @@ run_simulation = (contestant) ->
         (#{games_won / NUM_GAMES_IN_SAMPLE * 100})%"""
 
 run_game = (contestant) ->
-    contestant.start_game()
+    contestant.start_game(game_size: NUM_ITEMS_IN_GAME)
 
-    inputs = [Math.random() for x in [1..10]]
-    guesses = [[input, contestant.guess_index(input)] for input in inputs]
+    inputs = (Math.random() for x in [1..NUM_ITEMS_IN_GAME])
+    guesses = ([input, contestant.guess_index(input)] for input in inputs)
     inputs_in_order = inputs[..].sort()
     return all(guesses, (input_then_index_guess) ->
         [input, index_guess] = input_then_index_guess
@@ -27,8 +28,8 @@ all = (list, test_func) ->
     return true
 
 sample_contestant = {
-    start_game: -> "whateva"
-    guess_index: (input) -> Math.floor((Math.random() * 10))
+    start_game: (configs) -> @game_size = configs.game_size
+    guess_index: (input) -> Math.floor((Math.random() * @game_size))
 }
 
 run_simulation sample_contestant
