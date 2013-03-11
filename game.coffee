@@ -1,5 +1,5 @@
 # Set these lower for testing, 10k and 4 seemed to work well
-NUM_GAMES_IN_SAMPLE = 10000
+NUM_GAMES_IN_SAMPLE = 1000000
 NUM_ITEMS_IN_GAME = 9
 WIN = true
 
